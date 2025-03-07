@@ -1,1 +1,1 @@
-# Pipex
+This project is an application that replicates the functionality of the pipe (|) operator, allowing data to be passed between processes seamlessly. I did this project in Ecole 42 School's 42 Istanbul Campus.
