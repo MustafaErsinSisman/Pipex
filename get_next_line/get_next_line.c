@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:52:44 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/06 10:28:19 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/07 13:58:18 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ char	*ft_buffer_s(int fd, char *s)
 
 char	*get_next_line_strin(int wrong)
 {
-	static char	*s ;
+	static char	*s;
 	char		*ptr;
 	int			fd;
 
-	fd = 0;
 	if (wrong)
 	{
 		free(s);
 		return (0);
 	}
+	fd = 0;
 	if (fd < 0 && BUFFER_SIZE < 1)
 		return (NULL);
 	s = ft_buffer_s(fd, s);

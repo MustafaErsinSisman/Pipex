@@ -3,6 +3,8 @@ CC		= cc
 CFLAGS 		= -Wall -Wextra -Werror
 SRCS		= pipex.c pipex_utils.c \
 	          ft_printf/ft_printf.c ft_printf/ft_printf_utils.c \
+		  get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+
 		  
 BONUSSRCS	= pipex_bonus.c pipex_utils_bonus.c \
 		  ft_printf/ft_printf.c ft_printf/ft_printf_utils.c \
