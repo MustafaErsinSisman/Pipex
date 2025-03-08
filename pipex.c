@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
+/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 12:51:48 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/07 12:51:48 by musisman         ###   ########.fr       */
+/*   Created: 2025/03/08 16:44:30 by musisman          #+#    #+#             */
+/*   Updated: 2025/03/08 16:44:30 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "pipex.h"
 
 void file_control(int *fd_infile, int *fd_outfile)
 {
-        // dosya varken izileri değiştirirsem ne olur F_OK R_OK nasıl çalışıyor doğru mu access ne döndürüyor vs incele bu methodu else komutları gereksiz gibi izinleri farklı şekilde kontrol etmen gerekebilir
         if (access("infile", F_OK) != 0)
         {
                 *fd_infile = open("infile", O_CREAT | O_RDONLY, 0644);
@@ -23,9 +23,9 @@ void file_control(int *fd_infile, int *fd_outfile)
         }
         else
         {
-                *fd_infile = open("infile", O_RDONLY);
                 if (access("infile", R_OK) != 0)
-                        perror("infile has not read permision!");
+                        chmod("infile", 0644);
+                *fd_infile = open("infile", O_RDONLY, 0644);                        
         }
         if (access("outfile", F_OK) != 0)
         {
@@ -35,9 +35,9 @@ void file_control(int *fd_infile, int *fd_outfile)
         }
         else
         {
-                *fd_outfile = open("outfile", O_WRONLY);
                 if (access("outfile", W_OK) != 0)
-                        perror("outfile has not read permision!");
+                        chmod("outfile", 0644);
+                *fd_outfile = open("outfile", O_WRONLY, 0644);
         }
 }
 
