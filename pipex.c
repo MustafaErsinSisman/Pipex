@@ -13,40 +13,20 @@
 
 #include "pipex.h"
 
-void file_control(int *fd_infile, int *fd_outfile)
+void file_control(int *fd_infile, int *fd_outfile, int ac, char **av)
 {
-        if (access("infile", F_OK) != 0)
+        *fd_infile = open(av[1], O_RDONLY, 0644);
+        if (*fd_infile == -1)
         {
-                *fd_infile = open("infile", O_CREAT | O_RDONLY, 0644);
-                if (*fd_infile == -1)
-                        perror("open error");
+                ft_putstr_fd(av[1], 2);
+                perror(" file not found");
         }
-        else
+        *fd_outfile = open(av[ac - 1], O_CREAT | O_WRONLY, 0644);
+        if (*fd_outfile == -1)
         {
-                if (access("infile", R_OK) != 0)
-                        chmod("infile", 0644);
-                *fd_infile = open("infile", O_RDONLY, 0644);                        
+                ft_putstr_fd(av[ac - 1], 2);
+                perror(" file not found");
         }
-        if (access("outfile", F_OK) != 0)
-        {
-                *fd_outfile = open("outfile", O_CREAT | O_WRONLY, 0644);
-                if (*fd_outfile == -1)
-                        perror("open error");
-        }
-        else
-        {
-                if (access("outfile", W_OK) != 0)
-                        chmod("outfile", 0644);
-                *fd_outfile = open("outfile", O_WRONLY, 0644);
-        }
-}
-
-void file_error(int *fd_infile, int *fd_outfile)
-{
-        if (*fd_infile != -1 && close(*fd_infile) == -1)
-                perror("infile close error! ");
-        if (*fd_outfile  != -1 &&  close(*fd_outfile) == -1)
-                perror("outfile close error! ");
 }
 
 int main(int ac, char **av)
@@ -56,15 +36,8 @@ int main(int ac, char **av)
                 int fd_infile;
                 int fd_outfile;
 
-                file_control(&fd_infile, &fd_outfile);
-                int i = 0;
-                while (av[1][i])
-                {
-                        // """"" eğer argüman olarak tek sayıda tırnak gönderirsem >  açılıyor çift sayıda tırnak gönderirsem de ne varsa  onu yazıyor orada "32""32" 3232 mesela neden?
-                        ft_printf("%c ", av[1][i++]);
-                }
-                ft_printf("\n%d %d\n", fd_infile,  fd_outfile);
-                file_error(&fd_infile, &fd_outfile);
+                file_control(&fd_infile, &fd_outfile, ac, av);
+                execve();
         }
         else
                 ft_printf("there is no 5 argument\n");
