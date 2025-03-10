@@ -13,7 +13,7 @@
 
 #include "pipex.h"
 
-void	child(char **av, char **env, int *fds)
+static void	child(char **av, char **env, int *fds)
 {
 	int	fd_infile;
 
@@ -26,7 +26,7 @@ void	child(char **av, char **env, int *fds)
 	exec(env, av[2]);
 }
 
-void	parent(char **av, char **env, int *fds)
+static void	parent(char **av, char **env, int *fds)
 {
 	int	fd_outfile;
 

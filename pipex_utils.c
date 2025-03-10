@@ -18,7 +18,7 @@ void	error(char *err)
 	exit(1);
 }
 
-char	*ft_path(char **env)
+static char	*ft_path(char **env)
 {
 	int		i;
 	char	*path;
@@ -43,7 +43,7 @@ void	ft_free(char **str)
 	free(str);
 }
 
-char	*pathc(char *cmd, char **env)
+static char	*pathc(char *cmd, char **env)
 {
 	int		i;
 	char	**path;

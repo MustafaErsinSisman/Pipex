@@ -30,11 +30,6 @@
 # define ERR_ENV "Environment hatasi"
 
 void	exec(char **envp, char *av);
-char	*pathc(char *cmd, char **envp);
-void	mother(char **av, char **envp, int *fd);
-void	child(char **av, char **envp, int *fd);
 void	error(char *hat);
-char	*ft_path(char **envp);
-void	ft_free(char **str);
 
 #endif
