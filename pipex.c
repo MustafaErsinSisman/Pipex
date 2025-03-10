@@ -13,42 +13,51 @@
 
 #include "pipex.h"
 
-void file_control(int *fd_infile, int *fd_outfile, int ac, char **av)
+void	child(char **av, char **env, int *fds)
 {
-        *fd_infile = open(av[1], O_RDONLY, 0644);
-        if (*fd_infile == -1)
-        {
-                ft_putstr_fd(av[1], 2);
-                perror(" file not found");
-        }
-        *fd_outfile = open(av[ac - 1], O_CREAT | O_TRUNC |O_WRONLY, 0644);
-        if (*fd_outfile == -1)
-        {
-                ft_putstr_fd(av[ac - 1], 2);
-                perror(" file not found");
-        }
+	int	fd_infile;
+
+	fd_infile = open(av[1], O_RDONLY, 0777);
+	if (fd_infile == -1)
+		error(ERR_RFILE);
+	dup2(fds[1], 1);
+	dup2(fd_infile, 0);
+	close(fds[0]);
+	exec(env, av[2]);
 }
 
-int main(int ac, char **av)
+void	parent(char **av, char **env, int *fds)
 {
+	int	fd_outfile;
+
+	fd_outfile = open(av[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	if (fd_outfile == -1)
+		error(ERR_WFILE);
+	dup2(fds[0], 0);
+	dup2(fd_outfile, 1);
+	close(fds[1]);
+	exec(env, av[3]);
+}
+
+int main(int ac, char **av, char **env)
+{
+        int		fds[2];
+	pid_t	pid;
+
+        if (env == NULL)
+		error(ERR_ENV);
         if (ac == 5)
         {
-                int fd_infile;
-                int fd_outfile;
-
-                file_control(&fd_infile, &fd_outfile, ac, av);
-                
-                // dup2(fd_infile, fd_outfile);
-                
-
-                // ft_putstr_fd("bu2312 \n", fd_outfile);
-                // ft_putstr_fd("belki 31231 kine\n", fd_outfile);
-                // close(fd_infile);
-                // close(fd_outfile);
-
-                
+                if (pipe(fds) == -1)
+			error(ERR_PIPE);
+                pid = fork();
+                if (pid == -1)
+			error(ERR_PRC);
+                if (pid == 0)
+                        child(av, env, fds);
+                parent(av, env, fds);
         }
         else
-                ft_printf("there is no 5 argument\n");
+                error(ERR_ARG);
         return (0);
 }

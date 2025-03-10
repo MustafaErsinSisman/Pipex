@@ -15,10 +15,26 @@
 # define PIPEX_H
 
 # include "./libft/libft.h"
-# include "./ft_printf/ft_printf.h"
-# include "./get_next_line/get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <sys/stat.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+# define ERR_RFILE "Okunacak dosya hatasi"
+# define ERR_WFILE "Yazilacak dosya hatasi"
+# define ERR_ARG "Arguman hatasi"
+# define ERR_PIPE "Pipe Hatasi"
+# define ERR_PATH "Path hatasi"
+# define ERR_CMD "Komut hatasi"
+# define ERR_PRC "Process hatasi"
+# define ERR_ENV "Environment hatasi"
+
+void	exec(char **envp, char *av);
+char	*pathc(char *cmd, char **envp);
+void	mother(char **av, char **envp, int *fd);
+void	child(char **av, char **envp, int *fd);
+void	error(char *hat);
+char	*ft_path(char **envp);
+void	ft_free(char **str);
 
 #endif
