@@ -24,8 +24,10 @@ static char	*ft_path(char **env)
 	char	*path;
 
 	i = 0;
-	while (ft_strnstr(env[i], "PATH", 4) == 0)
+	while (ft_strnstr(env[i], "PATH", 4) == 0 && env[i + 1])
 		i++;
+	if (!env[i + 1])
+		error(ERR_PATH);
 	path = ft_substr(env[i], 5, ft_strlen(env[i]) - 5);
 	return (path);
 }
