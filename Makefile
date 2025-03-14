@@ -3,7 +3,8 @@ CC		= cc
 CFLAGS 		= -Wall -Wextra -Werror
 SRCS		= pipex.c pipex_utils.c \
 		  
-BONUSSRCS	= pipex_bonus.c pipex_bonus_utils.c \
+BONUSSRCS	= pipex_bonus.c pipex_bonus_utils.c extra_bonus_utils.c\
+		  get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 
 LIBFT		= libft/libft.a
 DIR_LIBFT	= libft
@@ -22,7 +23,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(BONUS)
 	make -s -C $(DIR_LIBFT) fclean
 
 re: fclean all

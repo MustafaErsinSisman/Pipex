@@ -28,7 +28,7 @@
 # define ERR_PRC "Process hatasi"
 # define ERR_ENV "Environment hatasi"
 
-void	exec(char **envp, char *av);
+void	exec(char **env, char *av);
 void	error(char *hat);
 
 #endif

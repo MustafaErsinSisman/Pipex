@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:48 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/13 13:07:06 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:57:05 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_BONUS_H
 
 # include "./libft/libft.h"
+# include "./get_next_line/get_next_line.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -29,7 +30,8 @@
 # define ERR_PRC "Process hatasi"
 # define ERR_ENV "Environment hatasi"
 
-void	exec(char **envp, char *av);
+void	exec(char **env, char *av);
 void	error(char *hat);
+void	read_strin(char *limiter, int fds[]);
 
 #endif
