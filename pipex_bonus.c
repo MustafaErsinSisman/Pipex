@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
+/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:31 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/14 13:05:54 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:40:33 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,10 @@ static	void	file_control(int *fd_infile, int *fd_outfile, int ac, char **av)
 		error(ERR_WFILE);
 }
 
-void	wait_child(pid_t pid)
-{
-	int	status;
-	int	exit_status;
-
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-	{
-		exit_status = WEXITSTATUS(status);
-		if (exit_status != 0)
-			exit(exit_status);
-	}
-}
-
 static void	child(char *av, char **env)
 {
-	pid_t pid;
-	int fds[2];
+	pid_t	pid;
+	int		fds[2];
 
 	if (pipe(fds) == -1)
 		error(ERR_PIPE);
@@ -54,9 +40,29 @@ static void	child(char *av, char **env)
 	}
 	else
 	{
-		wait_child(pid);
 		close(fds[1]);
 		dup2(fds[0], 0);
+		waitpid(pid, NULL, 0);
+	}
+}
+
+static void	read_strin(char *limiter, int fds[])
+{
+	char	*line;
+
+	line = get_next_line(0);
+	close(fds[0]);
+	while (line)
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		{
+			get_next_line(1);
+			free(line);
+			exit(0);
+		}
+		ft_putstr_fd(line, fds[1]);
+		free(line);
+		line = get_next_line(0);
 	}
 }
 
@@ -74,18 +80,18 @@ void	here_doc(char *limiter)
 		read_strin(limiter, fds);
 	else
 	{
-		wait_child(pid);
 		close(fds[1]);
 		dup2(fds[0], 0);
+		wait(NULL);
 	}
 }
 
 int	main(int ac, char **av, char **env)
 {
-	int		input_fd;
-	int		output_fd;
-	int i;
-	
+	int	input_fd;
+	int	output_fd;
+	int	i;
+
 	if (ac < 5)
 		error(ERR_ARG);
 	file_control(&input_fd, &output_fd, ac, av);

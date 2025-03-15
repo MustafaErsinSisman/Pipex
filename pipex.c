@@ -38,25 +38,25 @@ static void	parent(char **av, char **env, int *fds)
 	exec(env, av[3]);
 }
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-        int		fds[2];
 	pid_t	pid;
+	int		fds[2];
 
-        if (env == NULL)
+	if (env == NULL)
 		error(ERR_ENV);
-        if (ac == 5)
-        {
-                if (pipe(fds) == -1)
+	if (ac == 5)
+	{
+		if (pipe(fds) == -1)
 			error(ERR_PIPE);
-                pid = fork();
-                if (pid == -1)
+		pid = fork();
+		if (pid == -1)
 			error(ERR_PRC);
-                if (pid == 0)
-                        child(av, env, fds);
-                parent(av, env, fds);
-        }
-        else
-                error(ERR_ARG);
-        return (0);
+		if (pid == 0)
+			child(av, env, fds);
+		parent(av, env, fds);
+	}
+	else
+		error(ERR_ARG);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:48:20 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/13 14:50:58 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:39:19 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static char	*pathc(char *cmd, char **env)
 	ft_free(path);
 	return (NULL);
 }
+
 void	exec(char **env, char *av)
 {
 	char	**cmd;

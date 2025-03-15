@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
+/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:52:44 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/14 13:16:52 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:34:26 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char	*get_next_line(int free_static)
 {
 	static char	*s ;
 	char		*ptr;
-	int fd;
-	
+	int			fd;
+
 	if (free_static)
 	{
 		free(s);
