@@ -22,7 +22,7 @@ static void	child(char **av, char **env, int *fds)
 	dup2(fds[1], 1);
 	dup2(fd_infile, 0);
 	close(fds[0]);
-	exec(env, av[2]);
+	do_execve(env, av[2]);
 }
 
 static void	parent(char **av, char **env, int *fds)
@@ -35,7 +35,7 @@ static void	parent(char **av, char **env, int *fds)
 	dup2(fds[0], 0);
 	dup2(fd_outfile, 1);
 	close(fds[1]);
-	exec(env, av[3]);
+	do_execve(env, av[3]);
 }
 
 int	main(int ac, char **av, char **env)

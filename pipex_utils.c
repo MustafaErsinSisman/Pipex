@@ -45,7 +45,7 @@ void	ft_free(char **str)
 	free(str);
 }
 
-static char	*pathc(char *cmd, char **env)
+static char	*find_path(char *cmd, char **env)
 {
 	int		i;
 	char	**path;
@@ -73,13 +73,13 @@ static char	*pathc(char *cmd, char **env)
 	return (NULL);
 }
 
-void	exec(char **env, char *av)
+void	do_execve(char **env, char *av)
 {
 	char	**cmd;
 	char	*path;
 
 	cmd = ft_split(av, ' ');
-	path = pathc(cmd[0], env);
+	path = find_path(cmd[0], env);
 	if (!path)
 	{
 		ft_free(cmd);

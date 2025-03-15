@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:31 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/15 09:40:33 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:49:53 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	child(char *av, char **env)
 	{
 		close(fds[0]);
 		dup2(fds[1], 1);
-		exec(env, av);
+		do_execve(env, av);
 	}
 	else
 	{
@@ -110,6 +110,6 @@ int	main(int ac, char **av, char **env)
 	while (i < ac - 2)
 		child(av[i++], env);
 	dup2(output_fd, 1);
-	exec(env, av[ac - 2]);
+	do_execve(env, av[ac - 2]);
 	return (0);
 }

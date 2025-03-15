@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:48 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/15 09:41:08 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:53:31 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 # include <unistd.h>
 # include <sys/wait.h>
 
-# define ERR_RFILE "Okunacak dosya hatasi"
-# define ERR_WFILE "Yazilacak dosya hatasi"
-# define ERR_ARG "Arguman hatasi"
-# define ERR_PIPE "Pipe Hatasi"
-# define ERR_PATH "Path hatasi"
-# define ERR_CMD "Komut hatasi"
-# define ERR_PRC "Process hatasi"
-# define ERR_ENV "Environment hatasi"
+# define ERR_RFILE "Read file error"
+# define ERR_WFILE "Write file error"
+# define ERR_ARG "Argument error"
+# define ERR_PIPE "Pipe error"
+# define ERR_PATH "Path error"
+# define ERR_CMD "Command error"
+# define ERR_PRC "Process error"
+# define ERR_ENV "Environment variables error"
 
-void	exec(char **env, char *av);
+void	do_execve(char **env, char *av);
 void	error(char *hat);
 
 #endif

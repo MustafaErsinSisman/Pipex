@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:48:20 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/15 09:39:19 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:54:01 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_free(char **str)
 	free(str);
 }
 
-static char	*pathc(char *cmd, char **env)
+static char	*find_path(char *cmd, char **env)
 {
 	int		i;
 	char	**path;
@@ -73,13 +73,13 @@ static char	*pathc(char *cmd, char **env)
 	return (NULL);
 }
 
-void	exec(char **env, char *av)
+void	do_execve(char **env, char *av)
 {
 	char	**cmd;
 	char	*path;
 
 	cmd = ft_split(av, 32);
-	path = pathc(cmd[0], env);
+	path = find_path(cmd[0], env);
 	if (!path)
 	{
 		ft_free(cmd);

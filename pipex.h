@@ -19,16 +19,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define ERR_RFILE "Okunacak dosya hatasi"
-# define ERR_WFILE "Yazilacak dosya hatasi"
-# define ERR_ARG "Arguman hatasi"
-# define ERR_PIPE "Pipe Hatasi"
-# define ERR_PATH "Path hatasi"
-# define ERR_CMD "Komut hatasi"
-# define ERR_PRC "Process hatasi"
-# define ERR_ENV "Environment hatasi"
+# define ERR_RFILE "Read file error"
+# define ERR_WFILE "Write file error"
+# define ERR_ARG "Argument error"
+# define ERR_PIPE "Pipe error"
+# define ERR_PATH "Path error"
+# define ERR_CMD "Command error"
+# define ERR_PRC "Process error"
+# define ERR_ENV "Environment variables error"
 
-void	exec(char **env, char *av);
+void	do_execve(char **env, char *av);
 void	error(char *hat);
 
 #endif
