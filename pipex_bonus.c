@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:31 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/15 09:49:53 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:09:10 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	void	file_control(int *fd_infile, int *fd_outfile, int ac, char **av)
 {
-	*fd_infile = open(av[1], O_RDONLY, 0777);
+	*fd_infile = open(av[1], O_RDONLY);
 	if (*fd_infile == -1 && ft_strncmp(av[1], "here_doc", 8))
 		error(ERR_RFILE);
 	*fd_outfile = open(av[ac - 1], O_CREAT | O_WRONLY | O_TRUNC, 0777);

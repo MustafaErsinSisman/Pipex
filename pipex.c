@@ -16,7 +16,7 @@ static void	child(char **av, char **env, int *fds)
 {
 	int	fd_infile;
 
-	fd_infile = open(av[1], O_RDONLY, 0777);
+	fd_infile = open(av[1], O_RDONLY);
 	if (fd_infile == -1)
 		error(ERR_RFILE);
 	dup2(fds[1], 1);
