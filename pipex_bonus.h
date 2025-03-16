@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:48 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/15 09:53:31 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:50:15 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@
 
 void	do_execve(char **env, char *av);
 void	error(char *hat);
+void process_tree(int ac, char **av, char **env, int *fds);
 
 #endif

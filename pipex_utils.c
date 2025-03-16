@@ -80,10 +80,7 @@ void	do_execve(char **env, char *av)
 
 	cmd = ft_split(av, ' ');
 	if (!cmd[0])
-	{
-		ft_free(cmd);
 		error(ERR_CMD);
-	}
 	path = find_path(cmd[0], env);
 	if (!path)
 	{
