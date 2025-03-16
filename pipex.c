@@ -22,10 +22,12 @@ static void	child(char **av, char **env, int *fds)
 	dup2(fds[1], 1);
 	dup2(fd_infile, 0);
 	close(fds[0]);
+	close(fds[1]);
+	close(fd_infile);
 	do_execve(env, av[2]);
 }
 
-static void	parent(char **av, char **env, int *fds)
+static void	grandchild(char **av, char **env, int *fds)
 {
 	int	fd_outfile;
 
@@ -34,13 +36,29 @@ static void	parent(char **av, char **env, int *fds)
 		error(ERR_WFILE);
 	dup2(fds[0], 0);
 	dup2(fd_outfile, 1);
+	close(fds[0]);
 	close(fds[1]);
+	close(fd_outfile);
 	do_execve(env, av[3]);
+}
+
+static int	creat_process(void (*func)(char **, char **, int *)
+		, char **av, char **env, int *fds)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		error(ERR_PRC);
+	if (pid == 0)
+		func(av, env, fds);
+	return (pid);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	pid_t	pid;
+	pid_t	pid_child;
+	pid_t	pid_grand_child;
 	int		fds[2];
 
 	if (env == NULL)
@@ -49,14 +67,13 @@ int	main(int ac, char **av, char **env)
 	{
 		if (pipe(fds) == -1)
 			error(ERR_PIPE);
-		pid = fork();
-		if (pid == -1)
-			error(ERR_PRC);
-		if (pid == 0)
-			child(av, env, fds);
-		parent(av, env, fds);
+		pid_child = creat_process(child, av, env, fds);
+		pid_grand_child = creat_process(grandchild, av, env, fds);
+		close(fds[0]);
+		close(fds[1]);
+		waitpid(pid_child, NULL, 0);
+		waitpid(pid_grand_child, NULL, 0);
 	}
 	else
 		error(ERR_ARG);
-	return (0);
 }

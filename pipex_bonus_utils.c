@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:48:20 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/15 09:54:01 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/16 10:29:51 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*ft_path(char **env)
 	return (path);
 }
 
-static void	ft_free(char **str)
+void	ft_free(char **str)
 {
 	int	i;
 
@@ -78,7 +78,12 @@ void	do_execve(char **env, char *av)
 	char	**cmd;
 	char	*path;
 
-	cmd = ft_split(av, 32);
+	cmd = ft_split(av, ' ');
+	if (!cmd[0])
+	{
+		ft_free(cmd);
+		error(ERR_CMD);
+	}
 	path = find_path(cmd[0], env);
 	if (!path)
 	{
@@ -89,3 +94,4 @@ void	do_execve(char **env, char *av)
 		error(ERR_PRC);
 	free(path);
 }
+

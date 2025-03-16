@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 # define ERR_RFILE "Read file error"
 # define ERR_WFILE "Write file error"
