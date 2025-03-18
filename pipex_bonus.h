@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
+/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:48 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/17 12:57:40 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:21:21 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@
 # define ERR_CMD "Command error"
 # define ERR_PRC "Process error"
 # define ERR_ENV "Environment variables error"
+# define ERR_MEM "Memory error"
 
 void	do_execve(char **env, char *av);
 void	error(char *hat);
+void	pipex_process(int ac, char **av, char **env, int *fds);
 
 #endif
