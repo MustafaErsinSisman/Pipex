@@ -15,19 +15,18 @@
 
 # include "./libft/libft.h"
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/wait.h>
 
-# define ERR_RFILE "Read file error"
-# define ERR_WFILE "Write file error"
-# define ERR_ARG "Argument error"
-# define ERR_PIPE "Pipe error"
-# define ERR_PATH "Path error"
-# define ERR_CMD "Command error"
-# define ERR_PRC "Process error"
-# define ERR_ENV "Environment variables error"
+# define ERR_RFILE "Read file error\n"
+# define ERR_WFILE "Write file error\n"
+# define ERR_ARG "Argument error\n"
+# define ERR_PIPE "Pipe error\n"
+# define ERR_PATH "Path error\n"
+# define ERR_CMD "Command error\n"
+# define ERR_PRC "Process error\n"
+# define ERR_ENV "Environment variables error\n"
 
 void	do_execve(char **env, char *av);
 void	error(char *hat);

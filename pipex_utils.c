@@ -14,7 +14,7 @@
 
 void	error(char *err)
 {
-	perror(err);
+	ft_putstr_fd(err, 2);
 	exit(1);
 }
 

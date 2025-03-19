@@ -6,7 +6,7 @@
 /*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:48:20 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/16 14:51:18 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:42:24 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error(char *err)
 {
-	perror(err);
+	ft_putstr_fd(err, 2);
 	exit(1);
 }
 
@@ -89,7 +89,7 @@ void	do_execve(char **env, char *av)
 	}
 	if (execve(path, cmd, env) == -1)
 	{
-		ft_free(cmd);	
+		ft_free(cmd);
 		free(path);
 		error(ERR_PRC);
 	}

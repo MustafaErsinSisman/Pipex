@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: musisman <<musisman@student.42.fr>>        +#+  +:+       +#+        */
+/*   By: musisman <musisman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:47:31 by musisman          #+#    #+#             */
-/*   Updated: 2025/03/17 13:40:04 by musisman         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:45:54 by musisman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
 
 static	void	file_control(int *fd_infile, int *fd_outfile, int ac, char **av)
 {
@@ -53,16 +52,16 @@ static void	child(char *av, char **env)
 static void	read_strin(char *limiter, int fds[])
 {
 	char	*line;
-	int len_limiter;
-	int len_line;
+	int		ln_limit;
+	int		ln_line;
 
-	len_limiter = ft_strlen(limiter);
+	ln_limit = ft_strlen(limiter);
 	close(fds[0]);
 	while (1)
 	{
 		line = get_next_line(0);
-		len_line = ft_strlen(line);
-		if (!ft_strncmp(line, limiter, len_limiter) && len_line == len_limiter + 1)
+		ln_line = ft_strlen(line);
+		if (!ft_strncmp(line, limiter, ln_limit) && ln_line == ln_limit + 1)
 		{
 			get_next_line(1);
 			free(line);
